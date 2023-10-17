@@ -21,6 +21,35 @@ const defineRulesFor = (role: string, subject: string) => {
 
   if (role === 'admin') {
     can('manage', 'all')
+  } else if (role === 'agent') {
+    can('read', [
+      'GeneralChat',
+      'HelpDesk',
+      'Documents',
+      'Profile',
+      'Billing',
+      'Settings',
+      'InstructionalVideos',
+      'Stats',
+      'Announcements',
+      'Home',
+      'acl-page'
+    ])
+    can('read', 'sub-agents', { createdBy: 'user.id' })
+  } else if (role === 'sub-agent') {
+    can('read', [
+      'GeneralChat',
+      'HelpDesk',
+      'Documents',
+      'Profile',
+      'Billing',
+      'Settings',
+      'InstructionalVideos',
+      'Stats',
+      'Announcements',
+      'Home',
+      'acl-page'
+    ])
   } else if (role === 'client') {
     can(['read'], 'acl-page')
   } else {
